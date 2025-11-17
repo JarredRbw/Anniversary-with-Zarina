@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
 import './Main.css';
 // 注意：需要将音乐文件放到 src/audio/ 目录下
 // import url from './audio/gbqq.mp3';

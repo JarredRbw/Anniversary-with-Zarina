@@ -85,9 +85,27 @@ npm run build
 
 ## 部署
 
-可以部署到：
+### 部署到 Vercel（推荐）
+
+1. 安装 Vercel CLI（如果还没有）：
+```bash
+npm i -g vercel
+```
+
+2. 在项目根目录运行：
+```bash
+vercel
+```
+
+3. 或者通过 Vercel 网站：
+   - 访问 [vercel.com](https://vercel.com)
+   - 导入 GitHub 仓库
+   - 自动检测并部署
+
+### 其他部署方式
+
+也可以部署到：
 - GitHub Pages
 - Netlify
-- Vercel
 - 或其他静态网站托管服务
 
