@@ -347,8 +347,8 @@ class Timeline extends Component {
 
           {/* 时间线标题 */}
           <div className="timeline-header">
-            <h1>我们的故事时间线</h1>
-            <p>记录我们一起走过的每一个重要时刻</p>
+            <h1>我们的时光轴</h1>
+            <p>记录我们一起经历的那些时刻</p>
           </div>
 
           {/* 时间线 */}
@@ -428,7 +428,7 @@ class Timeline extends Component {
 
           {/* 底部祝福 */}
           <div className="timeline-footer">
-            <p>愿我们的故事继续书写下去，直到永远 ❤️</p>
+            <p>希望我们可以一直一直在一起，以上全部献给我最爱的杨怡萱 ❤️</p>
           </div>
         </div>
       </div>
