@@ -4,19 +4,34 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #ff6b9d 0%, #c45a7a 50%, #ffb6c1 100%);
+  background: linear-gradient(135deg, #ff6b9d 0%, #c45a7a 40%, #ffb6c1 70%, #ff8fab 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
   cursor: pointer;
   overflow: hidden;
   position: relative;
 }
 
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* 背景星光效果 */
 .envelope-container::before {
   content: '';
   position: absolute;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-  background-size: 50px 50px;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.15) 2px, transparent 2px),
+    radial-gradient(circle at 60% 70%, rgba(255, 255, 255, 0.12) 1.5px, transparent 1.5px),
+    radial-gradient(circle at 80% 40%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 100px 100px, 150px 150px, 80px 80px;
   animation: sparkle 20s linear infinite;
   pointer-events: none;
 }
@@ -38,10 +53,23 @@
   transform-style: preserve-3d;
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   will-change: transform;
+  animation: envelopeFloat 3s ease-in-out infinite;
+  filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.2));
+}
+
+@keyframes envelopeFloat {
+  0%, 100% {
+    transform: translateY(0) rotateY(0deg);
+  }
+  50% {
+    transform: translateY(-15px) rotateY(2deg);
+  }
 }
 
 .envelope:hover {
-  transform: scale(1.05);
+  transform: translateY(-10px) scale(1.08) rotateY(-3deg);
+  animation: none;
+  filter: drop-shadow(0 20px 45px rgba(0, 0, 0, 0.3));
 }
 
 .envelope-front {
@@ -68,14 +96,44 @@
   border-right: 200px solid transparent;
   border-top: 150px solid #d4a574;
   transform-origin: top;
-  transition: transform 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   z-index: 3;
   will-change: transform;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.25));
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+}
+
+/* 信封装饰爱心 */
+.envelope-flap::before {
+  content: '💌';
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 40px;
+  opacity: 0.8;
+  filter: drop-shadow(0 2px 4px rgba(255, 107, 157, 0.3));
+  animation: heartBeat 2s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+  0%, 100% {
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.1);
+  }
 }
 
 .envelope:hover .envelope-flap {
   transform: rotateX(-180deg);
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.3));
+}
+
+.envelope:hover .envelope-flap::before {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-30px) scale(1.2);
+  transition: all 0.6s ease;
 }
 
 .envelope-body {
@@ -84,15 +142,49 @@
   left: 0;
   width: 400px;
   height: 150px;
-  background: #e8c99b;
+  background: linear-gradient(135deg, #e8c99b 0%, #f0d4a3 50%, #e8c99b 100%);
   border: 2px solid #d4a574;
+  border-top: none;
   z-index: 2;
-  transition: box-shadow 0.3s ease;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.5s ease, background 0.5s ease;
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.1),
+    inset 0 -2px 4px rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 信封内部光效 */
+.envelope-body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 3s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
 }
 
 .envelope:hover .envelope-body {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.25),
+    inset 0 -2px 4px rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, #f0d4a3 0%, #f5dab0 50%, #f0d4a3 100%);
 }
 
 .envelope-back {
@@ -108,46 +200,131 @@
 
 .letter {
   position: absolute;
-  top: 0;
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
   width: 360px;
   height: 250px;
-  background: white;
-  padding: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #ffffff 0%, #fefefe 100%);
+  padding: 25px;
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
   z-index: 4;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: all 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
   will-change: transform, top, box-shadow;
-  border-radius: 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 182, 193, 0.2);
+  overflow: hidden;
+  position: relative;
+}
+
+/* 信纸装饰线条 */
+.letter::before {
+  content: '';
+  position: absolute;
+  top: 50px;
+  left: 30px;
+  right: 30px;
+  height: 1px;
+  background: repeating-linear-gradient(
+    to right,
+    rgba(255, 182, 193, 0.3) 0px,
+    rgba(255, 182, 193, 0.3) 20px,
+    transparent 20px,
+    transparent 40px
+  );
+  opacity: 0.5;
 }
 
 .envelope:hover .letter {
-  top: -120px;
-  transform: translateX(-50%) translateY(-20px) scale(1.02);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+  top: -150px;
+  transform: translateX(-50%) translateY(-30px) scale(1.05) rotateZ(-2deg);
+  box-shadow: 
+    0 20px 50px rgba(0, 0, 0, 0.3),
+    0 0 30px rgba(255, 107, 157, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  animation: letterFloat 2s ease-in-out infinite;
+}
+
+@keyframes letterFloat {
+  0%, 100% {
+    transform: translateX(-50%) translateY(-30px) scale(1.05) rotateZ(-2deg);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-35px) scale(1.05) rotateZ(2deg);
+  }
 }
 
 .text {
-  font-size: 24px;
-  color: #333;
+  font-size: 26px;
+  color: #c45a7a;
   text-align: center;
-  font-weight: 500;
-  animation: pulse 2s ease-in-out infinite;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-weight: 600;
+  animation: textGlow 2.5s ease-in-out infinite;
+  text-shadow: 
+    0 2px 4px rgba(196, 90, 122, 0.3),
+    0 0 20px rgba(255, 107, 157, 0.2);
+  letter-spacing: 2px;
+  position: relative;
+  z-index: 1;
 }
 
-@keyframes pulse {
+/* 文字闪烁效果 */
+.text::before {
+  content: '✨';
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  animation: sparkleRotate 2s linear infinite;
+  opacity: 0.8;
+}
+
+.text::after {
+  content: '✨';
+  position: absolute;
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  animation: sparkleRotate 2s linear infinite reverse;
+  opacity: 0.8;
+}
+
+@keyframes textGlow {
   0%, 100% {
     opacity: 1;
     transform: scale(1);
+    text-shadow: 
+      0 2px 4px rgba(196, 90, 122, 0.3),
+      0 0 20px rgba(255, 107, 157, 0.2);
   }
   50% {
+    opacity: 0.9;
+    transform: scale(1.03);
+    text-shadow: 
+      0 4px 8px rgba(196, 90, 122, 0.4),
+      0 0 30px rgba(255, 107, 157, 0.4);
+  }
+}
+
+@keyframes sparkleRotate {
+  0% {
+    transform: translateY(-50%) rotate(0deg) scale(1);
     opacity: 0.8;
-    transform: scale(1.02);
+  }
+  50% {
+    transform: translateY(-50%) rotate(180deg) scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50%) rotate(360deg) scale(1);
+    opacity: 0.8;
   }
 }
 

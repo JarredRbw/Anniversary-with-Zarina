@@ -1,0 +1,1021 @@
+.timeline-container {
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 0;
+  animation: fadeIn 0.8s ease-out;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  /* 隐藏滚动条 */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  /* 性能优化 */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  will-change: scroll-position;
+}
+
+.timeline-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* 移除黑色遮罩，不再使用 */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.timeline-wrapper {
+  position: relative;
+  z-index: 10;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 100px 60px 500px 60px;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* 返回按钮 */
+.back-button {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+  z-index: 1000;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 250, 250, 0.96) 100%);
+  border: 1.5px solid rgba(255, 182, 193, 0.4);
+  border-radius: 25px;
+  color: #c45a7a;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 10px 28px rgba(255, 107, 157, 0.3),
+    0 5px 14px rgba(196, 90, 122, 0.2);
+  /* 移除backdrop-filter以提升性能 */
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.back-button:hover {
+  transform: translateX(-5px) scale(1.05);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(255, 245, 250, 1) 100%);
+  box-shadow: 
+    0 14px 40px rgba(255, 107, 157, 0.45),
+    0 7px 20px rgba(196, 90, 122, 0.3);
+}
+
+/* 一键到底按钮 */
+.scroll-to-bottom-button {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  z-index: 1000;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(255, 250, 250, 0.96) 100%);
+  border: 1.5px solid rgba(255, 182, 193, 0.4);
+  border-radius: 25px;
+  color: #c45a7a;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 10px 28px rgba(255, 107, 157, 0.3),
+    0 5px 14px rgba(196, 90, 122, 0.2);
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.scroll-to-bottom-button:hover {
+  transform: translateY(3px) scale(1.05);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(255, 245, 250, 1) 100%);
+  box-shadow: 
+    0 14px 40px rgba(255, 107, 157, 0.45),
+    0 7px 20px rgba(196, 90, 122, 0.3);
+}
+
+/* 生日倒计时 */
+.birthday-countdown {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 250, 250, 0.92) 50%,
+    rgba(255, 240, 245, 0.95) 100%
+  );
+  padding: 50px 60px;
+  border-radius: 32px;
+  box-shadow: 
+    0 30px 80px rgba(255, 107, 157, 0.3),
+    0 15px 40px rgba(196, 69, 105, 0.2),
+    inset 0 2px 8px rgba(255, 255, 255, 0.9),
+    inset 0 -2px 4px rgba(255, 182, 193, 0.2);
+  margin-bottom: 80px;
+  /* 移除backdrop-filter以提升性能 */
+  animation: slideUp 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-align: center;
+  border: 1px solid rgba(255, 182, 193, 0.3);
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  will-change: transform, opacity;
+}
+
+.birthday-countdown::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 107, 157, 0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.birthday-title {
+  font-size: 28px;
+  background: linear-gradient(135deg, #ff6b9d 0%, #c45a7a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+.countdown-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.countdown-item {
+  background: linear-gradient(135deg, #ff6b9d 0%, #c45a7a 50%, #ffb6c1 100%);
+  padding: 20px 25px;
+  border-radius: 18px;
+  min-width: 80px;
+  box-shadow: 
+    0 10px 25px rgba(255, 107, 157, 0.35),
+    0 5px 12px rgba(196, 90, 122, 0.25),
+    inset 0 2px 4px rgba(255, 255, 255, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.countdown-item:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 
+    0 15px 35px rgba(255, 107, 157, 0.45),
+    0 8px 18px rgba(196, 90, 122, 0.35);
+}
+
+.countdown-value {
+  font-size: 36px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 5px;
+}
+
+.countdown-label {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.countdown-separator {
+  font-size: 32px;
+  color: #ff6b9d;
+  font-weight: bold;
+}
+
+/* 时间线标题 */
+.timeline-header {
+  text-align: center;
+  margin-bottom: 60px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.timeline-header.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 当 header 离开视口时，恢复初始状态 */
+.timeline-header:not(.in-view) {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.timeline-header h1 {
+  font-size: 56px;
+  background: linear-gradient(135deg, #ff6b9d 0%, #c45a7a 50%, #ffb6c1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 20px;
+  font-weight: 900;
+  text-shadow: 0 4px 8px rgba(255, 107, 157, 0.2);
+  letter-spacing: -0.5px;
+  position: relative;
+  animation: titleGlow 3s ease-in-out infinite;
+}
+
+@keyframes titleGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px rgba(255, 107, 157, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(255, 107, 157, 0.5));
+  }
+}
+
+.timeline-header p {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+}
+
+/* 时间线 */
+.timeline {
+  position: relative;
+  padding: 0;
+  overflow: visible;
+  min-height: 100vh;
+  width: 100%;
+  /* 确保timeline容器有足够高度容纳所有内容 */
+}
+
+/* 简单的垂直时间线 - 直接用div画线 */
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  width: 3px;
+  background: linear-gradient(to bottom, #ff6b9d, #c45a7a, #ffb6c1);
+  transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: none;
+  opacity: 1;
+  box-shadow: 0 0 6px rgba(255, 107, 157, 0.5);
+  /* 确保线条在marker下方 - 使用较低的z-index */
+}
+
+@keyframes handDrawnWiggle {
+  0%, 100% {
+    filter: 
+      drop-shadow(0 0 6px rgba(255, 107, 157, 0.5))
+      drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+  }
+  25% {
+    filter: 
+      drop-shadow(0.5px 0.3px 6px rgba(255, 107, 157, 0.5))
+      drop-shadow(0.5px 1.3px 2px rgba(0, 0, 0, 0.2));
+  }
+  50% {
+    filter: 
+      drop-shadow(-0.3px 0.5px 6px rgba(255, 107, 157, 0.5))
+      drop-shadow(-0.3px 1.5px 2px rgba(0, 0, 0, 0.2));
+  }
+  75% {
+    filter: 
+      drop-shadow(0.3px -0.2px 6px rgba(255, 107, 157, 0.5))
+      drop-shadow(0.3px 0.8px 2px rgba(0, 0, 0, 0.2));
+  }
+}
+
+@keyframes drawLine {
+  0% {
+    stroke-dashoffset: 2000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* 更轻量的丝滑动画，只改变filter的opacity，性能更好 */
+@keyframes smoothGlow {
+  0%, 100% {
+    filter: 
+      drop-shadow(0 0 6px rgba(255, 107, 157, 0.5))
+      drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+  }
+  50% {
+    filter: 
+      drop-shadow(0 0 8px rgba(255, 107, 157, 0.7))
+      drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2));
+  }
+}
+
+/* 时间线容器 */
+.timeline-items-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  padding: 80px 0 150px 0; /* 优化padding，从100px/200px减少到80px/150px */
+  width: 100%;
+  min-height: 100vh;
+  z-index: 2;
+  /* 确保items容器在线上方 */
+}
+
+.timeline-item {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  max-width: 900px;
+  margin-bottom: 150px; /* 优化间距，从200px减少到150px，可显示更多事件 */
+  opacity: 0;
+  transform: translateX(0);
+  flex-shrink: 0;
+  padding: 0 60px;
+  min-height: 180px; /* 优化最小高度，从200px减少到180px */
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  transition-delay: 0s;
+  z-index: 5;
+  /* 确保item在线上方 */
+}
+
+/* 奇数项从左边滑入 */
+.timeline-item:nth-child(odd) {
+  transform: translateX(-50px);
+}
+
+/* 偶数项从右边滑入 */
+.timeline-item:nth-child(even) {
+  transform: translateX(50px);
+}
+
+/* 当元素进入视口时的状态 */
+.timeline-item.in-view {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* 当元素离开视口时，恢复初始状态（用于向上滚动时重新触发动画） */
+.timeline-item:not(.in-view):nth-child(odd) {
+  transform: translateX(-50px);
+  opacity: 0;
+}
+
+.timeline-item:not(.in-view):nth-child(even) {
+  transform: translateX(50px);
+  opacity: 0;
+}
+
+/* 为每个item设置不同的延迟 */
+.timeline-item:nth-child(1).in-view {
+  transition-delay: 0.1s;
+}
+
+.timeline-item:nth-child(2).in-view {
+  transition-delay: 0.2s;
+}
+
+.timeline-item:nth-child(3).in-view {
+  transition-delay: 0.3s;
+}
+
+.timeline-item:nth-child(4).in-view {
+  transition-delay: 0.4s;
+}
+
+.timeline-item:nth-child(5).in-view {
+  transition-delay: 0.5s;
+}
+
+.timeline-item:nth-child(6).in-view {
+  transition-delay: 0.6s;
+}
+
+.timeline-item:nth-child(7).in-view {
+  transition-delay: 0.7s;
+}
+
+.timeline-item:nth-child(8).in-view {
+  transition-delay: 0.8s;
+}
+
+.timeline-item:last-child {
+  margin-bottom: 0;
+}
+
+/* 左右交替显示 */
+.timeline-item:nth-child(odd) {
+  flex-direction: row;
+  padding-left: 0;
+  padding-right: 60px;
+}
+
+.timeline-item:nth-child(even) {
+  flex-direction: row-reverse;
+  padding-left: 60px;
+  padding-right: 0;
+}
+
+/* timeline-marker图标样式 - 参考personalweb，添加动画特效 */
+.timeline-marker {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%) scale(0);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 使用白色背景来遮挡线条 */
+  background-color: rgba(255, 255, 255, 1) !important;
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.15),
+    0 0 0 5px rgba(255, 255, 255, 1),
+    0 0 0 8px rgba(255, 107, 157, 0.15);
+  z-index: 20;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  margin: 0;
+  opacity: 0;
+  /* 确保marker能遮挡线条 - 使用实心边框 */
+  border: 4px solid rgba(255, 255, 255, 1);
+  box-sizing: border-box;
+}
+
+/* 创建一个伪元素作为额外的遮挡层，确保线条被完全遮挡 */
+.timeline-marker::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 1);
+  z-index: -1;
+  /* 确保能遮挡3px宽的线条 - 使用更大的尺寸 */
+}
+
+/* 当父元素进入视口时，marker 才显示 */
+.timeline-item.in-view .timeline-marker {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-50%) scale(1);
+}
+
+/* 每个marker的动画延迟（基于item的延迟基础上再延迟0.2s） */
+.timeline-item:nth-child(1).in-view .timeline-marker {
+  transition-delay: 0.3s;
+}
+
+.timeline-item:nth-child(2).in-view .timeline-marker {
+  transition-delay: 0.4s;
+}
+
+.timeline-item:nth-child(3).in-view .timeline-marker {
+  transition-delay: 0.5s;
+}
+
+.timeline-item:nth-child(4).in-view .timeline-marker {
+  transition-delay: 0.6s;
+}
+
+.timeline-item:nth-child(5).in-view .timeline-marker {
+  transition-delay: 0.7s;
+}
+
+.timeline-item:nth-child(6).in-view .timeline-marker {
+  transition-delay: 0.8s;
+}
+
+.timeline-item:nth-child(7).in-view .timeline-marker {
+  transition-delay: 0.9s;
+}
+
+.timeline-item:nth-child(8).in-view .timeline-marker {
+  transition-delay: 1.0s;
+}
+
+.timeline-icon {
+  font-size: 24px;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+.timeline-item:hover .timeline-marker {
+  transform: translateX(-50%) translateY(-50%) scale(1.2);
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.25),
+    0 0 0 6px rgba(255, 255, 255, 1),
+    0 0 0 10px rgba(255, 107, 157, 0.4);
+}
+
+.timeline-item:hover .timeline-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.timeline-content {
+  width: calc(50% - 60px);
+  background: rgba(255, 255, 255, 0.98);
+  padding: 35px 40px;
+  border-radius: 16px;
+  box-shadow: 
+    0 12px 30px rgba(0, 0, 0, 0.08),
+    0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: all 0.3s ease,
+              opacity 0.5s ease-out 0.2s,
+              transform 0.5s ease-out 0.2s;
+  border: 1px solid rgba(255, 182, 193, 0.2);
+  text-align: left;
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+}
+
+/* 当父元素进入视口时，content 才显示 */
+.timeline-item.in-view .timeline-content {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* 当父元素离开视口时，content 恢复初始状态 */
+.timeline-item:not(.in-view) .timeline-content {
+  opacity: 0;
+  transform: translateY(30px) scale(0.95);
+}
+
+/* 移除content的::before动画 */
+
+.timeline-item:hover .timeline-content {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 16px 40px rgba(0, 0, 0, 0.12),
+    0 6px 16px rgba(0, 0, 0, 0.06);
+  border-color: rgba(255, 182, 193, 0.4);
+}
+
+.timeline-date {
+  font-size: 13px;
+  color: #ff6b9d;
+  font-weight: 600;
+  margin-bottom: 8px;
+  letter-spacing: 0.3px;
+}
+
+.timeline-title {
+  font-size: 22px;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.timeline-description {
+  font-size: 15px;
+  color: #666;
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+
+/* 时间线照片容器 */
+.timeline-image-container {
+  margin-top: 20px;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.15),
+    0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+/* 图片加载错误提示 */
+.timeline-image-container .image-error-message {
+  padding: 20px;
+  background: rgba(255, 107, 157, 0.1);
+  border: 2px dashed rgba(255, 107, 157, 0.4);
+  border-radius: 12px;
+  color: #c45a7a;
+  font-size: 14px;
+  text-align: center;
+  line-height: 1.6;
+  margin: 10px 0;
+}
+
+.timeline-image-container .image-error-message::before {
+  content: '⚠️ ';
+  font-size: 18px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.timeline-item:hover .timeline-image-container {
+  transform: scale(1.02);
+  box-shadow: 
+    0 12px 30px rgba(0, 0, 0, 0.2),
+    0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.timeline-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.timeline-item:hover .timeline-image {
+  transform: scale(1.05);
+}
+
+.timeline-item.special .timeline-content {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 193, 7, 0.85) 0%,
+    rgba(255, 152, 0, 0.9) 50%,
+    rgba(255, 182, 193, 0.85) 100%
+  );
+  border: 2px solid rgba(255, 215, 0, 0.8);
+  box-shadow: 
+    0 15px 40px rgba(255, 215, 0, 0.4),
+    0 5px 15px rgba(255, 182, 193, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  /* 确保文字颜色为白色，提高可读性 */
+  color: #ffffff;
+}
+
+/* 金色框中的日期颜色 */
+.timeline-item.special .timeline-content .timeline-date {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 700;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 金色框中的标题颜色 */
+.timeline-item.special .timeline-content .timeline-title {
+  color: #ffffff;
+  font-weight: 700;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* 金色框中的描述颜色 */
+.timeline-item.special .timeline-content .timeline-description {
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+.timeline-item.special .timeline-marker {
+  /* 保持白色背景以遮挡线条 */
+  background-color: rgba(255, 255, 255, 1) !important;
+  border: 4px solid rgba(255, 255, 255, 1) !important;
+  box-shadow: 
+    0 10px 30px rgba(255, 215, 0, 0.4),
+    0 0 0 5px rgba(255, 255, 255, 1),
+    0 0 0 8px rgba(255, 215, 0, 0.3);
+  animation: glow 2s ease-in-out 0.8s infinite;
+  z-index: 20;
+}
+
+.timeline-item.special:hover .timeline-marker {
+  box-shadow: 
+    0 15px 40px rgba(255, 215, 0, 0.6),
+    0 0 0 6px rgba(255, 255, 255, 1),
+    0 0 0 10px rgba(255, 215, 0, 0.5);
+  transform: translateX(-50%) translateY(-50%) scale(1.2);
+}
+
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 
+      0 10px 30px rgba(255, 215, 0, 0.4),
+      0 0 0 8px rgba(255, 255, 255, 0.9),
+      0 0 0 12px rgba(255, 215, 0, 0.5);
+  }
+  50% {
+    box-shadow: 
+      0 15px 40px rgba(255, 215, 0, 0.6),
+      0 0 0 8px rgba(255, 255, 255, 1),
+      0 0 0 12px rgba(255, 215, 0, 0.7);
+  }
+}
+
+@keyframes slideInFromSide {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.timeline-item:nth-child(even) {
+  animation-name: slideInFromRight;
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 底部祝福 */
+.timeline-footer {
+  text-align: center;
+  margin-top: 300px; /* 大幅增加上边距，确保与中心线有足够间距，避免冲突 */
+  margin-bottom: 100px; /* 增加下边距 */
+  padding: 40px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 250, 250, 0.95) 100%
+  );
+  border-radius: 28px;
+  box-shadow: 
+    0 25px 70px rgba(255, 107, 157, 0.25),
+    inset 0 2px 4px rgba(255, 255, 255, 0.95);
+  /* 移除backdrop-filter以提升性能 */
+  animation: fadeInUp 0.8s ease-out 1s both;
+  will-change: transform, opacity;
+  position: relative;
+  z-index: 5; /* 确保footer在线条上方 */
+}
+
+.timeline-footer p {
+  font-size: 20px;
+  color: #c45a7a;
+  font-weight: 600;
+  line-height: 1.6;
+}
+
+/* 响应式设计 - 平板 */
+@media (max-width: 1024px) {
+  .timeline-wrapper {
+    padding: 80px 40px 400px 40px;
+    max-width: 100%;
+  }
+
+  .timeline-item {
+    max-width: 100%;
+    padding: 0 40px;
+    margin-bottom: 250px;
+  }
+
+  .timeline-content {
+    width: calc(50% - 40px);
+    padding: 35px 40px;
+  }
+
+  .birthday-countdown {
+    padding: 40px 50px;
+  }
+
+  .timeline-header h1 {
+    font-size: 48px;
+  }
+
+  .timeline-line {
+    width: 3px;
+  }
+}
+
+/* 响应式设计 - 手机 */
+@media (max-width: 768px) {
+  /* 移动设备上使用scroll，因为fixed可能不支持或性能差 */
+  .timeline-container {
+    background-attachment: scroll;
+  }
+  
+  .timeline-wrapper {
+    padding: 60px 20px 200px 20px;
+    max-width: 100%;
+  }
+
+  .timeline-items-container {
+    padding: 100px 0 200px 0;
+  }
+
+  .timeline-item {
+    flex-direction: column !important;
+    padding: 0 20px !important;
+    margin-bottom: 200px;
+    align-items: center;
+    max-width: 100%;
+    min-height: auto;
+  }
+
+  .timeline-marker {
+    position: relative;
+    left: auto;
+    top: auto;
+    transform: none;
+    width: 70px;
+    height: 70px;
+    margin-bottom: 30px;
+  }
+
+  .timeline-content {
+    width: 100%;
+    text-align: center;
+    padding: 30px 25px;
+    min-height: auto;
+  }
+
+  .timeline-icon {
+    font-size: 28px;
+  }
+
+  .timeline-line {
+    width: 3px;
+    left: 30px;
+  }
+
+  .timeline-items-container {
+    padding-left: 60px;
+  }
+
+  .birthday-countdown {
+    padding: 35px 30px;
+    margin-bottom: 60px;
+  }
+
+  .birthday-title {
+    font-size: 22px;
+  }
+
+  .countdown-item {
+    min-width: 60px;
+    padding: 15px 18px;
+  }
+
+  .countdown-value {
+    font-size: 28px;
+  }
+
+  .timeline-header {
+    margin-bottom: 40px;
+  }
+
+  .timeline-header h1 {
+    font-size: 36px;
+  }
+
+  .timeline-header p {
+    font-size: 16px;
+  }
+
+  .timeline-date {
+    font-size: 13px;
+  }
+
+  .timeline-title {
+    font-size: 20px;
+  }
+
+  .timeline-description {
+    font-size: 15px;
+  }
+
+  .timeline-image-container {
+    margin-top: 15px;
+    border-radius: 12px;
+  }
+
+  .back-button {
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+
+  .scroll-to-bottom-button {
+    top: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+}
+
+/* 响应式设计 - 小屏手机 */
+@media (max-width: 480px) {
+  .timeline-wrapper {
+    padding: 50px 15px 150px 15px;
+  }
+
+  .timeline-item {
+    margin-bottom: 150px;
+    padding: 0 15px !important;
+  }
+
+  .timeline-content {
+    padding: 25px 20px;
+  }
+
+  .birthday-countdown {
+    padding: 30px 20px;
+  }
+
+  .birthday-title {
+    font-size: 20px;
+  }
+
+  .countdown-item {
+    min-width: 50px;
+    padding: 12px 15px;
+  }
+
+  .countdown-value {
+    font-size: 24px;
+  }
+
+  .timeline-header h1 {
+    font-size: 28px;
+  }
+
+  .timeline-title {
+    font-size: 18px;
+  }
+
+  .timeline-description {
+    font-size: 14px;
+  }
+
+  .timeline-image-container {
+    margin-top: 12px;
+    border-radius: 10px;
+  }
+
+  .back-button {
+    top: 15px;
+    left: 15px;
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+
+  .scroll-to-bottom-button {
+    top: 15px;
+    right: 15px;
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+}

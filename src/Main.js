@@ -158,6 +158,14 @@ class Main extends Component {
           <span className="love-icon">💕</span>
         </a>
 
+        {/* 时间线按钮 */}
+        {this.props.onShowTimeline && (
+          <button className="timeline-button" onClick={this.props.onShowTimeline} title="查看我们的故事时间线">
+            <span className="timeline-button-icon">📅</span>
+            <span className="timeline-button-text">时间线</span>
+          </button>
+        )}
+
         {/* 背景遮罩层已在 CSS 中通过 ::before 实现 */}
 
         {/* 音频播放器（隐藏） */}
