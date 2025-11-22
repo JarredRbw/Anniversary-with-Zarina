@@ -21,7 +21,7 @@
   ],
   "headers": [
     {
-      "source": "/love/(.*\\.(jpg|jpeg|png|gif|svg|css|js|html))",
+      "source": "/love/:path*",
       "headers": [
         {
           "key": "Cache-Control",
@@ -30,7 +30,7 @@
       ]
     },
     {
-      "source": "/static/(.*)",
+      "source": "/static/:path*",
       "headers": [
         {
           "key": "Cache-Control",
