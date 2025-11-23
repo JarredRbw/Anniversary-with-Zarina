@@ -337,7 +337,7 @@ class Timeline extends Component {
 
           {/* 生日倒计时 */}
           <div className="birthday-countdown">
-            <h2 className="birthday-title">🎂 距离你的19岁生日还有</h2>
+            <h2 className="birthday-title">🎂 距离你的18岁生日还有</h2>
             <div className="countdown-container">
               <div className="countdown-item">
                 <div className="countdown-value">{birthdayCountdown.day}</div>
