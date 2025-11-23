@@ -200,6 +200,13 @@ class Timeline extends Component {
   }
 
   calculateBirthdayCountdown = () => {
+    // 临时设置为正好生日那一刻（用于截图）
+    // 设置为2025年11月24日 00:00:00
+    this.setState({
+      birthdayCountdown: { day: 0, hour: 0, minute: 0, second: 0 }
+    });
+    
+    /* 正常版本（已注释，截图后需要恢复）
     const now = new Date();
     const birthday = new Date(2025, 10, 24); // 2025年11月24日（月份从0开始）
     
@@ -226,6 +233,7 @@ class Timeline extends Component {
     this.setState({
       birthdayCountdown: { day, hour, minute, second }
     });
+    */
   }
 
   // 计算时间线位置和高度
