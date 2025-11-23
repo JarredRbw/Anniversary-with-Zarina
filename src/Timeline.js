@@ -60,7 +60,7 @@ class Timeline extends Component {
   }
 
   componentDidMount() {
-    // 计算18岁生日倒计时（2024年11月24日）
+    // 计算19岁生日倒计时（2025年11月24日）
     this.calculateBirthdayCountdown();
     this.countdownInterval = setInterval(() => {
       this.calculateBirthdayCountdown();
@@ -201,7 +201,7 @@ class Timeline extends Component {
 
   calculateBirthdayCountdown = () => {
     const now = new Date();
-    const birthday = new Date(2024, 10, 24); // 11月24日（月份从0开始）
+    const birthday = new Date(2025, 10, 24); // 2025年11月24日（月份从0开始）
     
     // 如果生日已过，计算下一年的生日
     if (now > birthday) {
@@ -209,6 +209,14 @@ class Timeline extends Component {
     }
     
     const diff = birthday - now;
+    
+    // 确保不会出现负数
+    if (diff <= 0) {
+      this.setState({
+        birthdayCountdown: { day: 0, hour: 0, minute: 0, second: 0 }
+      });
+      return;
+    }
     
     const day = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hour = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -321,7 +329,7 @@ class Timeline extends Component {
 
           {/* 生日倒计时 */}
           <div className="birthday-countdown">
-            <h2 className="birthday-title">🎂 距离你的18岁生日还有</h2>
+            <h2 className="birthday-title">🎂 距离你的19岁生日还有</h2>
             <div className="countdown-container">
               <div className="countdown-item">
                 <div className="countdown-value">{birthdayCountdown.day}</div>
